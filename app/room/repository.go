@@ -7,10 +7,10 @@ import (
 )
 
 type Repository interface {
-	FindOne(id uint64) (*model.Customer, error)
-	FindAll() ([]model.Customer, error)
-	Create(customer *model.Customer) error
-	Update(customer *model.Customer, id uint64) error
+	FindOne(id uint64) (*model.Rooms, error)
+	FindAll() ([]model.Rooms, error)
+	Create(room *model.Rooms) error
+	Update(room *model.Rooms, id uint64) error
 	Remove(id uint64) error
 	Destroy(id uint64) error
 }
@@ -25,51 +25,51 @@ func NewRepository(db *gorm.DB) Repository {
 	}
 }
 
-func (r *repository) FindOne(id uint64) (*model.Customer, error) {
-	var customer model.Customer
+func (r *repository) FindOne(id uint64) (*model.Rooms, error) {
+	var room model.Rooms
 
-	if err := r.db.First(&customer, id).Error; err != nil {
+	if err := r.db.First(&room, id).Error; err != nil {
 		return nil, err
 	}
 
-	return &customer, nil
+	return &room, nil
 }
 
-func (r *repository) FindAll() ([]model.Customer, error) {
-	var customers []model.Customer
+func (r *repository) FindAll() ([]model.Rooms, error) {
+	var rooms []model.Rooms
 
-	if err := r.db.Find(&customers).Error; err != nil {
+	if err := r.db.Find(&rooms).Error; err != nil {
 		return nil, err
 	}
-	return customers, nil
+	return rooms, nil
 }
 
-func (r *repository) Create(customer *model.Customer) error {
+func (r *repository) Create(room *model.Rooms) error {
 
-	if err := r.db.Create(customer).Error; err != nil {
+	if err := r.db.Create(room).Error; err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (r *repository) Update(customer *model.Customer, id uint64) error {
+func (r *repository) Update(room *model.Rooms, id uint64) error {
 
-	if err := r.db.Model(customer).Update("id = ?", id).Error; err != nil {
+	if err := r.db.Model(room).Update("id = ?", id).Error; err != nil {
 		return err
 	}
 	return nil
 }
 
 func (r *repository) Remove(id uint64) error {
-	if err := r.db.Where("id = ?").Delete(&model.Customer{}).Error; err != nil {
+	if err := r.db.Where("id = ?").Delete(&model.Rooms{}).Error; err != nil {
 		return err
 	}
 	return nil
 }
 
 func (r *repository) Destroy(id uint64) error {
-	if err := r.db.Unscoped().Where("id = ?").Delete(&model.Customer{}).Error; err != nil {
+	if err := r.db.Unscoped().Where("id = ?").Delete(&model.Rooms{}).Error; err != nil {
 		return err
 	}
 	return nil

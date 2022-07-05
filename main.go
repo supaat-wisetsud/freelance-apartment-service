@@ -72,6 +72,8 @@ func main() {
 		return context.String(http.StatusOK, "OK")
 	})
 
+	e.Static("/", "./")
+
 	router.V1(e, gormInstance)
 
 	e.Logger.Fatal(e.Start(":3011"))

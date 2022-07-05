@@ -43,9 +43,9 @@ func V1(e *echo.Echo, db *gorm.DB) {
 
 		customerRoute.Use(authorizetionHandler.Handler)
 
-		customerRoute.GET("/", customerHandler.HandlerFindAll)
+		customerRoute.GET("", customerHandler.HandlerFindAll)
 		customerRoute.GET("/:id", customerHandler.HandlerFindOne)
-		customerRoute.POST("/", customerHandler.HandlerCreate)
+		customerRoute.POST("", customerHandler.HandlerCreate)
 		customerRoute.PUT("/:id", customerHandler.HandlerUpdate)
 		customerRoute.PUT("/profile/:id", customerHandler.HandlerUploadProfile)
 		customerRoute.DELETE("/:id", customerHandler.HandlerRemove)
@@ -66,7 +66,7 @@ func V1(e *echo.Echo, db *gorm.DB) {
 		roomRoute.GET("/:id", roomHandler.HandlerFindOne)
 		roomRoute.POST("/", roomHandler.HandlerCreate)
 		roomRoute.PUT("/:id", roomHandler.HandlerUpdate)
-		roomRoute.PUT("/picture/:id", roomHandler.HandlerUploadProfile)
+		roomRoute.PUT("/picture/:id", roomHandler.HandlerUploadPicture)
 		roomRoute.DELETE("/:id", roomHandler.HandlerRemove)
 		roomRoute.DELETE("/destory/:id", roomHandler.HandlerDestory)
 	}

@@ -11,8 +11,8 @@ type Rooms struct {
 	Name       string         `json:"name" gorm:"not null;unique"`
 	Active     bool           `json:"active" gorm:"not null;default:false"`
 	Customer   *Customer      `json:"customer" gorm:"foreignkey:CustomerID"`
-	CustomerID uint64         `json:"customer_id" grom:"column:customer_id"`
-	Picture    []byte         `json:"picture" sql:"type:json" gorm:"type:json"`
+	CustomerID uint64         `json:"customer_id" gorm:"column:customer_id"`
+	Picture    string         `json:"picture" sql:"type:json" gorm:"type:json"`
 	CreatedAt  time.Time      `json:"created_date" gorm:";column:created_at;autoCreateTime"`
 	UpdatedAt  time.Time      `json:"updated_date" gorm:";column:updated_at;autoUpdateTime"`
 	DeletedAt  gorm.DeletedAt `json:"deleted_date" gorm:"index;column:deleted_at"`
