@@ -127,7 +127,7 @@ func (h *Handler) HandlerUploadProfile(c echo.Context) error {
 
 	file, err := c.FormFile("profile")
 	if err != nil {
-		return err
+		return errorCustomMessage(c, err.Error())
 	}
 
 	if err := h.service.UpdateProfileByID(file, uint64(id)); err != nil {

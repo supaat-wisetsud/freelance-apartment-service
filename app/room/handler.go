@@ -1,6 +1,7 @@
 package room
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -125,9 +126,10 @@ func (h *Handler) HandlerUploadPicture(c echo.Context) error {
 		return errorCustomMessage(c, err.Error())
 	}
 
-	file, err := c.FormFile("profile")
+	file, err := c.FormFile("picture")
+	fmt.Println("file")
 	if err != nil {
-		return err
+		return errorCustomMessage(c, err.Error())
 	}
 
 	if err := h.service.UpdatePictureByID(file, uint64(id)); err != nil {

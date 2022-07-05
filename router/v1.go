@@ -62,9 +62,9 @@ func V1(e *echo.Echo, db *gorm.DB) {
 
 		roomRoute.Use(authorizetionHandler.Handler)
 
-		roomRoute.GET("/", roomHandler.HandlerFindAll)
+		roomRoute.GET("", roomHandler.HandlerFindAll)
 		roomRoute.GET("/:id", roomHandler.HandlerFindOne)
-		roomRoute.POST("/", roomHandler.HandlerCreate)
+		roomRoute.POST("", roomHandler.HandlerCreate)
 		roomRoute.PUT("/:id", roomHandler.HandlerUpdate)
 		roomRoute.PUT("/picture/:id", roomHandler.HandlerUploadPicture)
 		roomRoute.DELETE("/:id", roomHandler.HandlerRemove)

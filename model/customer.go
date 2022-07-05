@@ -13,7 +13,7 @@ type Customer struct {
 	PhoneNo   string         `json:"phone_no" gorm:"column:phone_no;not null"`
 	Email     string         `json:"email" gorm:"not null;unique"`
 	Address   *string        `json:"address" gorm:"column:address"`
-	Profile   string         `json:"profile" sql:"type:json" gorm:"type:json"`
+	Profile   string         `json:"profile"`
 	CreatedAt time.Time      `json:"created_date" gorm:";column:created_at;autoCreateTime"`
 	UpdatedAt time.Time      `json:"updated_date" gorm:";column:updated_at;autoUpdateTime"`
 	DeletedAt gorm.DeletedAt `json:"deleted_date" gorm:"index;column:deleted_at"`

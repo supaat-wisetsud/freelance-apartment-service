@@ -1,7 +1,6 @@
 package auth
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -47,8 +46,7 @@ func (h *Handler) HandlerRegister(c echo.Context) error {
 	}
 
 	if err := h.service.registerUser(req.Username, req.Password, req.Name, req.PhoneNo, req.Email); err != nil {
-		log.Fatalln(err.Error())
-		return errorUnexpected(c)
+		return errorCustomMessage(c, err.Error())
 	}
 
 	return c.JSON(http.StatusCreated, response{

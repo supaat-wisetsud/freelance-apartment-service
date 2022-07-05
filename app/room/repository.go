@@ -55,21 +55,21 @@ func (r *repository) Create(room *model.Rooms) error {
 
 func (r *repository) Update(room *model.Rooms, id uint64) error {
 
-	if err := r.db.Model(room).Update("id = ?", id).Error; err != nil {
+	if err := r.db.Model(&model.Rooms{}).Where("id = ?", id).Updates(room).Error; err != nil {
 		return err
 	}
 	return nil
 }
 
 func (r *repository) Remove(id uint64) error {
-	if err := r.db.Where("id = ?").Delete(&model.Rooms{}).Error; err != nil {
+	if err := r.db.Where("id = ?", id).Delete(&model.Rooms{}).Error; err != nil {
 		return err
 	}
 	return nil
 }
 
 func (r *repository) Destroy(id uint64) error {
-	if err := r.db.Unscoped().Where("id = ?").Delete(&model.Rooms{}).Error; err != nil {
+	if err := r.db.Unscoped().Where("id = ?", id).Delete(&model.Rooms{}).Error; err != nil {
 		return err
 	}
 	return nil

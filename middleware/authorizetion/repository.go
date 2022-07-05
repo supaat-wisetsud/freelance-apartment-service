@@ -2,6 +2,7 @@ package authorizetion
 
 import (
 	"apartment/model"
+	"errors"
 
 	"gorm.io/gorm"
 )
@@ -22,7 +23,14 @@ func NewRepository(db *gorm.DB) Repository {
 
 func (r *repository) findOneToken(accessToken string) (*model.Token, error) {
 
-	r.db.Where("access_token = ?", accessToken).First(&model.Token{})
+	var token model.Token
+	if err := r.db.Where("access_token = ?", accessToken).First(&token).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, nil
+		}
 
-	return nil, nil
+		return nil, err
+	}
+
+	return &token, nil
 }
