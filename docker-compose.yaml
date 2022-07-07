@@ -1,4 +1,3 @@
-
 version: "3.9"
 
 networks:
@@ -16,6 +15,23 @@ services:
       - ./temp/mysql:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=banana
+    networks:
+      - apartment_network
+  apartmentservice:
+    build: .
+    image: apartment-api
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - 3011:3011
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_NAME=apartment
+      - DB_USER=root
+      - DB_PASS=banana
+      - SECRET=abc
     networks:
       - apartment_network
   phpmyadmin:

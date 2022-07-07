@@ -28,7 +28,7 @@ func NewRepository(db *gorm.DB) Repository {
 func (r *repository) FindOne(id uint64) (*model.Rooms, error) {
 	var room model.Rooms
 
-	if err := r.db.First(&room, id).Error; err != nil {
+	if err := r.db.Preload("Customer").First(&room, id).Error; err != nil {
 		return nil, err
 	}
 
@@ -38,7 +38,7 @@ func (r *repository) FindOne(id uint64) (*model.Rooms, error) {
 func (r *repository) FindAll() ([]model.Rooms, error) {
 	var rooms []model.Rooms
 
-	if err := r.db.Find(&rooms).Error; err != nil {
+	if err := r.db.Preload("Customer").Find(&rooms).Error; err != nil {
 		return nil, err
 	}
 	return rooms, nil
