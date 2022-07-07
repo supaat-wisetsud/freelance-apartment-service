@@ -37,6 +37,7 @@ var (
 			echo.POST,
 			echo.PUT,
 			echo.OPTIONS,
+			echo.DELETE,
 		},
 	})
 )
