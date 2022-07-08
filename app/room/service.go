@@ -98,7 +98,12 @@ func (s *service) DestoryRoomByID(id uint64) error {
 
 func (s *service) UpdatePictureByID(file *multipart.FileHeader, id uint64) error {
 
-	path := "/public/images/rooms/" + strconv.Itoa(int(id))
+	dir := "/public/images/rooms"
+	if _, err := os.Stat(dir); os.IsNotExist(err) {
+		os.MkdirAll(dir, os.ModePerm)
+	}
+
+	path := dir + "/" + strconv.Itoa(int(id))
 	// Multipart form
 	src, err := file.Open()
 	if err != nil {

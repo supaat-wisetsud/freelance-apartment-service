@@ -25,6 +25,8 @@ services:
       - mysql
     ports:
       - 3011:3011
+    volumes:
+      - ./temp/public:/public
     environment:
       - DB_HOST=mysql
       - DB_PORT=3306
