@@ -11,6 +11,7 @@ func InitMigrations(db *gorm.DB) *gormigrate.Gormigrate {
 		m1657022564CreateTableTokens(),
 		m1657022597CreateTableCustomers(),
 		m1657022580CreateTableRooms(),
+		m1664297317CreateTableLogs(),
 	})
 
 	return m

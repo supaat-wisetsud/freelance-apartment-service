@@ -3,6 +3,7 @@ package router
 import (
 	"apartment/app/auth"
 	"apartment/app/customer"
+	"apartment/app/logs"
 	"apartment/app/room"
 	"apartment/middleware/authorizetion"
 	"apartment/utility"
@@ -69,5 +70,19 @@ func V1(e *echo.Echo, db *gorm.DB) {
 		roomRoute.PUT("/picture/:id", roomHandler.HandlerUploadPicture)
 		roomRoute.DELETE("/:id", roomHandler.HandlerRemove)
 		roomRoute.DELETE("/destory/:id", roomHandler.HandlerDestory)
+	}
+
+	// logs
+	{
+		logsRepository := logs.NewRepository(db)
+		logsService := logs.NewService(logsRepository)
+		logsHandler := logs.NewHandler(logsService)
+
+		logsRoute := g.Group("/logs")
+
+		logsRoute.Use(authorizetionHandler.Handler)
+
+		logsRoute.GET("", logsHandler.HandlerFindAll)
+		logsRoute.POST("", logsHandler.HandlerCreate)
 	}
 }

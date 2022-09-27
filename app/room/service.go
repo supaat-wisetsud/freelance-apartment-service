@@ -11,8 +11,8 @@ import (
 type Service interface {
 	FindAllRoom() ([]model.Rooms, error)
 	FindOneRoomByID(id uint64) (*model.Rooms, error)
-	CreateRoom(name string, customerID *uint64, active bool) error
-	UpdateRoom(name string, customerID *uint64, active bool, id uint64) error
+	CreateRoom(name string, customerID *uint64, active bool, price float64) error
+	UpdateRoom(name string, customerID *uint64, active bool, price float64, id uint64) error
 	RemoveRoomByID(id uint64) error
 	DestoryRoomByID(id uint64) error
 	UpdatePictureByID(file *multipart.FileHeader, id uint64) error
@@ -50,12 +50,13 @@ func (s *service) FindOneRoomByID(id uint64) (*model.Rooms, error) {
 	return room, nil
 }
 
-func (s *service) CreateRoom(name string, customerID *uint64, active bool) error {
+func (s *service) CreateRoom(name string, customerID *uint64, active bool, price float64) error {
 
 	room := model.Rooms{
 		Name:       name,
 		CustomerID: customerID,
 		Active:     active,
+		Price:      price,
 	}
 
 	if err := s.repository.Create(&room); err != nil {
@@ -65,11 +66,12 @@ func (s *service) CreateRoom(name string, customerID *uint64, active bool) error
 	return nil
 }
 
-func (s *service) UpdateRoom(name string, customerID *uint64, active bool, id uint64) error {
+func (s *service) UpdateRoom(name string, customerID *uint64, active bool, price float64, id uint64) error {
 	room := model.Rooms{
 		Name:       name,
 		CustomerID: customerID,
 		Active:     active,
+		Price:      price,
 	}
 	if err := s.repository.Update(&room, id); err != nil {
 		return err

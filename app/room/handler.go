@@ -54,7 +54,7 @@ func (h *Handler) HandlerCreate(c echo.Context) error {
 		return errorInvalidBodyRequest(c)
 	}
 
-	if err := h.service.CreateRoom(req.Name, req.CustomerID, req.Active); err != nil {
+	if err := h.service.CreateRoom(req.Name, req.CustomerID, req.Active, req.Price); err != nil {
 		return errorCustomMessage(c, err.Error())
 	}
 
@@ -76,7 +76,7 @@ func (h *Handler) HandlerUpdate(c echo.Context) error {
 		return errorInvalidBodyRequest(c)
 	}
 
-	if err := h.service.UpdateRoom(req.Name, req.CustomerID, req.Active, uint64(id)); err != nil {
+	if err := h.service.UpdateRoom(req.Name, req.CustomerID, req.Active, req.Price, uint64(id)); err != nil {
 		return errorCustomMessage(c, err.Error())
 	}
 

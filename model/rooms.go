@@ -10,6 +10,7 @@ type Rooms struct {
 	ID         uint64         `json:"id" gorm:"primaryKey;not null"`
 	Name       string         `json:"name" gorm:"not null;unique"`
 	Active     bool           `json:"active" gorm:"not null;default:false"`
+	Price      float64        `json:"price" gorm:"column:price"`
 	Customer   *Customer      `json:"customer" gorm:"foreignkey:CustomerID"`
 	CustomerID *uint64        `json:"customer_id" gorm:"column:customer_id"`
 	Picture    string         `json:"picture"`
